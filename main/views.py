@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from uuid import uuid4
 from urllib.parse import urlparse
 from django.core.validators import URLValidator
@@ -8,20 +9,43 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from scrapyd_api import ScrapydAPI
 # from main.utils import URLUtil
-from main.models import ScrapyItem
+from main.models import ScrapyItem, Tweet, News
+import matplotlib.pyplot as pPlot
+from wordcloud import WordCloud, STOPWORDS
+import numpy as npy
+from PIL import Image
+from django.shortcuts import render
+from django.conf import settings
+
 
 # connect scrapyd service
 scrapyd = ScrapydAPI('http://localhost:6800')
 
 
-def is_valid_url(url):
-    validate = URLValidator()
-    try:
-        validate(url)  # check if url format is valid
-    except ValidationError:
-        return False
+def create_word_cloud(string, file_name):
+    maskArray = npy.array(Image.open(settings.STATIC_ROOT + 'cloud.jpg'))
+    cloud = WordCloud(background_color="white", max_words=200, mask=maskArray, stopwords=set(STOPWORDS))
+    cloud.generate(string)
+    cloud.to_file(settings.STATIC_ROOT + file_name)
 
-    return True
+
+def homepage(request):
+    # dataset = open("sampleWords.txt", "r").read()
+    # dataset = dataset.lower()
+    # dataset_tweet = ""
+    list_of_tweets = Tweet.objects.all()[:25]
+    dataset_tweet = " ".join([i.tweet for i in list_of_tweets]).lower()
+    create_word_cloud(dataset_tweet, "tweets_cloud.png")
+
+    list_of_news = News.objects.all()[:25]
+    dataset_news = " ".join([i.headline for i in list_of_news]).lower()
+    create_word_cloud(dataset_news, "news_cloud.png")
+    context = {
+        "tweets": list_of_tweets,
+        "news": list_of_news
+    }
+    return render(request, 'icrawler/home.html', context)
+    return JsonResponse()
 
 
 @csrf_exempt
@@ -78,5 +102,3 @@ def crawl(request):
                 return JsonResponse({'error': str(e)})
         else:
             return JsonResponse({'status': status})
-
-

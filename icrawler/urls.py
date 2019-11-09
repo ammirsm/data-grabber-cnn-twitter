@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main.views import crawl
+import main.views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('crawl/', crawl),
-]
+    path('crawl/', main.views.crawl),
+    path('', main.views.homepage),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

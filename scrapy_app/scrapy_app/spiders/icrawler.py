@@ -23,6 +23,7 @@ class IcrawlerSpider(scrapy.Spider):
 
         for news in response:
             yield {
+                "type": "news",
                 'headline': news["headline"],
                 'body': news["body"],
                 'url': news["url"]

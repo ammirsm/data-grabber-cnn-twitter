@@ -34,3 +34,9 @@ class ScrapyItem(models.Model):
 
     def __str__(self):
         return self.unique_id
+
+
+class Tweet(models.Model):
+    tweet = models.CharField(max_length=500000)
+    time = models.CharField(max_length=5000)
+

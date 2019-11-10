@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Quote, News, Tweet
+from main.models import News, Tweet
 
 
 class QuoteAdmin(admin.ModelAdmin):
@@ -15,6 +15,5 @@ class TweetAdmin(admin.ModelAdmin):
 
 
 # Register your models here.
-admin.site.register(Quote, QuoteAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Tweet, TweetAdmin)

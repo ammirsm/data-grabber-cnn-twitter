@@ -3,137 +3,197 @@
 <!DOCTYPE html>
 <html lang="en-gb" dir="ltr">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Tweet and News</title>
-        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/css/uikit.min.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/js/uikit.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tweet and News</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/css/uikit.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/js/uikit.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("amir")
+            $("#twitter-refresh").click(function () {
+                $.post("crawl/",
+                    {
+                        type: "twitter",
+                    },
+                    function (data, status) {
+                        alert("Result: " + "Crawler started its work, if you want to be aware of its work just go for 6800 port!" + "\nStatus: " + status);
+                    });
+            });
+        });
 
-    <body>
+        $(document).ready(function () {
+            console.log("amir")
+            $("#cnn-refresh").click(function () {
+                $.post("crawl/",
+                    {
+                        type: "cnn",
+                    },
+                    function (data, status) {
+                        alert("Result: " + "Crawler started its work, if you want to be aware of its work just go for 6800 port!" + "\nStatus: " + status);
+                    });
+            });
+        });
+    </script>
+</head>
 
-        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+<body>
 
-            <nav class="uk-navbar uk-margin-large-bottom">
-                <a class="uk-navbar-brand uk-hidden-small" href="layouts_frontpage.html">TN</a>
-                <ul class="uk-navbar-nav uk-hidden-small">
-                    <li class="uk-active">
-                        <a href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="https://twitter.com">Twitter</a>
-                    </li>
-                    <li>
-                        <a href="https://cnn.com">CNN</a>
-                    </li>
-                </ul>
-                <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
-                <div class="uk-navbar-brand uk-navbar-center uk-visible-small">Brand</div>
-            </nav>
+<div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
 
-            <div class="uk-grid" data-uk-grid-margin>
-                <div class="uk-width-medium-1-1">
+    <nav class="uk-navbar uk-margin-large-bottom">
+        <a class="uk-navbar-brand uk-hidden-small" href="layouts_frontpage.html">TN</a>
+        <ul class="uk-navbar-nav uk-hidden-small">
+            <li class="uk-active">
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="https://twitter.com">Twitter</a>
+            </li>
+            <li>
+                <a href="https://cnn.com">CNN</a>
+            </li>
+        </ul>
+        <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
+        <div class="uk-navbar-brand uk-navbar-center uk-visible-small">Brand</div>
+    </nav>
+
+    <div class="uk-grid" data-uk-grid-margin>
+        <div class="uk-width-medium-1-1">
 
 
-                    <div class="uk-vertical-align uk-text-center" style="background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjQsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkViZW5lXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMTEzMHB4IiBoZWlnaHQ9IjQ1MHB4IiB2aWV3Qm94PSIwIDAgMTEzMCA0NTAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDExMzAgNDUwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxyZWN0IGZpbGw9IiNGNUY1RjUiIHdpZHRoPSIxMTMwIiBoZWlnaHQ9IjQ1MCIvPg0KPC9zdmc+DQo=') 50% 0 no-repeat; height: 200px;">
-                        <div class="uk-vertical-align-middle uk-width-1-2">
-                            <h1 class="uk-heading-large">GET DATA EASILY</h1>
-                            <p class="uk-text-large">Here, you can skim what you want really fast and easy!</p>
-                            <p>
-                                <a class="uk-button uk-button-primary uk-button-large" href="#">Refresh Twitter</a>
-                                <a class="uk-button uk-button-large" href="#">Refresh CNN</a>
-                            </p>
+            <div class="uk-vertical-align uk-text-center"
+                 style="background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjQsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkViZW5lXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMTEzMHB4IiBoZWlnaHQ9IjQ1MHB4IiB2aWV3Qm94PSIwIDAgMTEzMCA0NTAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDExMzAgNDUwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxyZWN0IGZpbGw9IiNGNUY1RjUiIHdpZHRoPSIxMTMwIiBoZWlnaHQ9IjQ1MCIvPg0KPC9zdmc+DQo=') 50% 0 no-repeat; height: 200px;">
+                <div class="uk-vertical-align-middle uk-width-1-2">
+                    <h1 class="uk-heading-large">GET DATA EASILY</h1>
+                    <p class="uk-text-large">Here, you can skim what you want really fast and easy!</p>
+                    <p>
+                        <a class="uk-button uk-button-primary uk-button-large" id="twitter-refresh"
+                           href="#">Refresh Twitter</a>
+                        <a class="uk-button uk-button-large" id="cnn-refresh" href="#">Refresh CNN</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="uk-grid" data-uk-grid-margin="">
+        <div class="uk-width-medium-1-2 uk-row-first">
+            <img width="660" height="400" src="media/news_cloud.png" alt="">
+            <p>Last News Word Cloud</p>
+        </div>
+        <div class="uk-width-medium-1-2 uk-row-first">
+            <img width="660" height="400" src="media/tweets_cloud.png" alt="">
+            <p class="uk">Last Tweets Word Cloud</p>
+        </div>
+    </div>
+    <div class="uk-grid" data-uk-grid-margin>
+        <div class="uk-width-medium-1-2">
+
+        </div>
+        <div class="uk-width-medium-1-2">
+        </div>
+    </div>
+
+    <hr class="uk-grid-divider">
+
+    <div class="uk-grid" data-uk-grid-margin>
+
+        <div class="uk-width-medium-1-1">
+            {% for the_tweet in tweets %}
+                <article class="uk-comment">
+                    <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+                        <div class="uk-width-auto">
+                            <img class="uk-comment-avatar" src="{{ the_tweet.user_picture }}" width="80" height="80" alt="">
                         </div>
+                        <div class="uk-width-expand">
+                            <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset"
+                                                                             href="{{ the_tweet.user }}#">{{ the_tweet.user_name }}</a>
+                            </h4>
+                            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                <li><a href="#">{{ the_tweet.time }}</a></li>
+                                <li><a href="{{ the_tweet.link }}">Open in twitter</a></li>
+                                <li>Crawled at {{ the_tweet.created_at }}</li>
+                            </ul>
+                        </div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <p>{{ the_tweet.tweet }}</p>
                     </div>
-
-                </div>
-            </div>
-        <div class="uk-grid" data-uk-grid-margin="">
-
-                <div class="uk-width-medium-1-2 uk-row-first">
-                    <img width="660" height="400" src="{% static "imgs/news_cloud.png" %}" alt="">
-                </div>
-                <div class="uk-width-medium-1-2 uk-row-first">
-                    <img width="660" height="400" src="{% static "imgs/tweets_cloud.png" %}" alt="">
-                </div>
-
-            </div>
-            <div class="uk-grid" data-uk-grid-margin>
-                <div class="uk-width-medium-1-2">
-
-                </div>
-                <div class="uk-width-medium-1-2">
-                </div>
-            </div>
-
-            <hr class="uk-grid-divider">
-
-            <div class="uk-grid" data-uk-grid-margin>
-
-                <div class="uk-width-medium-1-1">
-                    <ul class="uk-list uk-list-striped">
-                    {% for tweet in tweets %}
-                    <li>
-                        {{ tweet.tweet }}
-                        </br>
-                        {{ tweet.time }}
-                    </li>
-                    {% endfor%}
-                </ul>
-
-                </div>
-
-
-            </div>
-
-            <hr class="uk-grid-divider">
-            <div class="uk-grid" data-uk-grid-margin>
-
-                <div class="uk-width-medium-1-1">
-                    <ul class="uk-list uk-list-striped">
-                    {% for tweet in news %}
-                    <li>
-                        {{ tweet.headline }}
-                        </br>
-                        {{ tweet.body }}
-                        </br>
-                        {{ tweet.url }}
-                    </li>
-                    {% endfor%}
-                </ul>
-                </div>
-            </div>
+                </article>
+                </br>
+                </br>
+                </br>
+            {% endfor %}
 
         </div>
 
-        <div id="offcanvas" class="uk-offcanvas">
-            <div class="uk-offcanvas-bar">
-                <ul class="uk-nav uk-nav-offcanvas">
-                    <li class="uk-active">
-                        <a href="layouts_frontpage.html">Frontpage</a>
-                    </li>
-                    <li>
-                        <a href="layouts_portfolio.html">Portfolio</a>
-                    </li>
-                    <li>
-                        <a href="layouts_blog.html">Blog</a>
-                    </li>
-                    <li>
-                        <a href="layouts_documentation.html">Documentation</a>
-                    </li>
-                    <li>
-                        <a href="layouts_contact.html">Contact</a>
-                    </li>
-                    <li>
-                        <a href="layouts_login.html">Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
 
-    </body>
+    </div>
+
+    <hr class="uk-grid-divider">
+    <div class="uk-grid" data-uk-grid-margin>
+
+        <div class="uk-width-medium-1-1">
+            <ul class="uk-list uk-list-striped">
+                {% for article in news %}
+                    <article class="uk-article">
+
+                        <h1 class="uk-article-title"><a class="uk-link-reset"
+                                                        href="{{ article.url }}">{{ article.headline }}</a></h1>
+
+                        <p class="uk-article-meta">Written by <a href="#">Super User</a> on 12 April 2012. Posted in <a
+                                href="#">Blog</a></p>
+
+                        <p class="uk-text-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                        <div class="uk-grid-small uk-child-width-auto" uk-grid>
+                            <div>
+                                <a class="uk-button uk-button-text" href="#">Read more</a>
+                            </div>
+                            <div>
+                                <a class="uk-button uk-button-text" href="#">5 Comments</a>
+                            </div>
+                        </div>
+
+                    </article>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div id="offcanvas" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar">
+        <ul class="uk-nav uk-nav-offcanvas">
+            <li class="uk-active">
+                <a href="layouts_frontpage.html">Frontpage</a>
+            </li>
+            <li>
+                <a href="layouts_portfolio.html">Portfolio</a>
+            </li>
+            <li>
+                <a href="layouts_blog.html">Blog</a>
+            </li>
+            <li>
+                <a href="layouts_documentation.html">Documentation</a>
+            </li>
+            <li>
+                <a href="layouts_contact.html">Contact</a>
+            </li>
+            <li>
+                <a href="layouts_login.html">Login</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
 </html>

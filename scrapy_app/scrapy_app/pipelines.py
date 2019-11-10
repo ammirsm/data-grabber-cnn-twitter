@@ -20,6 +20,10 @@ class ScrapyAppPipeline(object):
             tweet = Tweet(
                 tweet=item.get('tweet'),
                 time=item.get('time'),
+                user=item.get('user'),
+                user_name=item.get('user_name'),
+                link=item.get('link'),
+                user_picture=item.get('user_picture')
             )
             tweet.save()
         return item

@@ -23,21 +23,18 @@ scrapyd = ScrapydAPI('http://localhost:6800')
 
 
 def create_word_cloud(string, file_name):
-    maskArray = npy.array(Image.open(settings.STATIC_ROOT + 'cloud.jpg'))
+    maskArray = npy.array(Image.open(settings.STATIC_ROOT + '/cloud.jpg'))
     cloud = WordCloud(background_color="white", max_words=200, mask=maskArray, stopwords=set(STOPWORDS))
     cloud.generate(string)
-    cloud.to_file(settings.STATIC_ROOT + file_name)
+    cloud.to_file(settings.MEDIA_ROOT + "/" + file_name)
 
 
 def homepage(request):
-    # dataset = open("sampleWords.txt", "r").read()
-    # dataset = dataset.lower()
-    # dataset_tweet = ""
-    list_of_tweets = Tweet.objects.all()[:25]
+    list_of_tweets = Tweet.objects.all().order_by('-created_at')[:15]
     dataset_tweet = " ".join([i.tweet for i in list_of_tweets]).lower()
     create_word_cloud(dataset_tweet, "tweets_cloud.png")
 
-    list_of_news = News.objects.all()[:25]
+    list_of_news = News.objects.all().order_by('-created_at')[:25]
     dataset_news = " ".join([i.headline for i in list_of_news]).lower()
     create_word_cloud(dataset_news, "news_cloud.png")
     context = {
@@ -52,12 +49,12 @@ def homepage(request):
 @require_http_methods(['POST', 'GET'])  # only get and post
 def crawl(request):
     # Post requests are for new crawling tasks
-    if request.method == 'GET':
+    if request.method == 'POST':
 
         # domain = urlparse(url).netloc  # parse the url and extract the domain
         unique_id = str(uuid4())  # create a unique ID.
-
         # This is the custom settings for scrapy spider.
+        type = request.POST["type"]
         # We can send anything we want to use it inside spiders and pipelines.
         # I mean, anything
         settings = {
@@ -70,8 +67,12 @@ def crawl(request):
         # But we can pass other arguments, though.
         # This returns a ID which belongs and will be belong to this task
         # We are goint to use that to check task's status.
-        task = scrapyd.schedule('default', 'icrawler',
-                                settings=settings)
+        if type == "twitter":
+            task = scrapyd.schedule('default', 'twitter',
+                                    settings=settings)
+        elif type == "cnn":
+            task = scrapyd.schedule('default', 'icrawler',
+                                    settings=settings)
 
         return JsonResponse({'task_id': task, 'unique_id': unique_id, 'status': 'started'})
 

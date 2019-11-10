@@ -3,19 +3,11 @@ import json
 from django.db import models
 from django.utils import timezone
 
-
-class Quote(models.Model):
-    """
-    The scrapped data will be saved in this model
-    """
-    text = models.TextField()
-    author = models.CharField(max_length=512)
-
-
 class News(models.Model):
     headline = models.CharField(max_length=5000)
     body = models.CharField(max_length=500000)
     url = models.CharField(max_length=5000)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
 class ScrapyItem(models.Model):
@@ -39,4 +31,10 @@ class ScrapyItem(models.Model):
 class Tweet(models.Model):
     tweet = models.CharField(max_length=500000)
     time = models.CharField(max_length=5000)
+    link = models.CharField(max_length=5000)
+    user = models.CharField(max_length=5000)
+    user_picture = models.CharField(max_length=5000)
+    user_name = models.CharField(max_length=5000)
+
+    created_at = models.DateTimeField(auto_now_add=True)
 

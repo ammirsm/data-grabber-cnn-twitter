@@ -39,4 +39,4 @@ curl http://localhost:6800/schedule.json -d project=default -d spider=icrawler
 
 The crawled data will be automatically be saved in the Django models
 
-For running this you have an access on homepage two.
+For running this you have an access on homepage too.

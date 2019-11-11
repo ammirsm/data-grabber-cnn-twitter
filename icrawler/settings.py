@@ -25,7 +25,7 @@ SECRET_KEY = '0qqskd*@bsrt1=$&*$gd9zje49vmeb_k6(yr*%m69ha$*72z(p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['167.71.97.53', 'crawler.hike.studio']
 
 
 # Application definition

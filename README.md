@@ -30,9 +30,13 @@ $ scrapyd
 ````
 
 At this point you will be able to send job request to Scrapyd. This project is setup with a demo spider from the oficial tutorial of scrapy. To run it you must send a http request to Scrapyd with the job info
+
+We have two spider 'icrawler' for crawling CNN and 'twitter' for crawling twitter.
+
 ````
 curl http://localhost:6800/schedule.json -d project=default -d spider=icrawler
 ````
 
 The crawled data will be automatically be saved in the Django models
 
+For running this you have an access on homepage two.

@@ -58,10 +58,10 @@ def crawl(request):
     # Post requests are for new crawling tasks
     if request.method == 'POST':
 
-        # domain = urlparse(url).netloc  # parse the url and extract the domain
         unique_id = str(uuid4())  # create a unique ID.
-        # This is the custom settings for scrapy spider.
         type = request.POST["type"]
+
+        # This is the custom settings for scrapy spider.
         # We can send anything we want to use it inside spiders and pipelines.
         # I mean, anything
         settings = {

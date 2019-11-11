@@ -4,7 +4,7 @@ Basic setup to get data from twitter and CNN with a keyword.
 * A crawler that crawls the latest 25 articles about Trump from CNN.com and his latest 25 tweets
 * A simple website that displays the titles of the crawled information
 * A convenient way of displaying the information after I click on one of the titles
-* Word Cloud of last 25 papers
+* Word Cloud of lastests news and tweet
 
 
 ## Setup

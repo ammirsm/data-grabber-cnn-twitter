@@ -5,6 +5,10 @@ from django.utils import timezone
 
 class News(models.Model):
     headline = models.CharField(max_length=5000)
+    byline = models.CharField(max_length=10000)
+    section = models.CharField(max_length=5000)
+    byline = models.CharField(max_length=5000)
+    picture = models.CharField(max_length=5000)
     body = models.CharField(max_length=500000)
     url = models.CharField(max_length=5000)
     created_at = models.DateTimeField(auto_now_add=True)

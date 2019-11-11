@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tweet and News</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/css/uikit.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/js/uikit.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+
+    <nav class="uk-navbar uk-margin-large-bottom">
+        <a class="uk-navbar-brand uk-hidden-small" href="layouts_frontpage.html">TN</a>
+        <ul class="uk-navbar-nav uk-hidden-small">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="https://twitter.com">Twitter</a>
+            </li>
+            <li class="uk-active">
+                <a href="https://cnn.com">CNN</a>
+            </li>
+        </ul>
+        <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
+        <div class="uk-navbar-brand uk-navbar-center uk-visible-small">Brand</div>
+    </nav>
+
+    <div class="uk-grid" data-uk-grid-margin>
+
+        <div class="uk-width-medium-1-1">
+            <ul class="uk-list uk-list-striped">
+                    <article class="uk-article">
+
+                        <h1 class="uk-article-title"><a class="uk-link-reset"
+                                                        href="{{ article.url }}">{{ article.headline }}</a></h1>
+                        <img width="660" height="400" src="{{ article.picture }}" alt="">
+                        <p class="uk-article-meta">{{ article.byline }}. Crawled on {{ article.created_at }}. Posted in <a
+                                href="">{{ article.section }}</a></p>
+
+                        <p class="uk-text-lead">{{article.body}}</p>
+
+                        <div class="uk-grid-small uk-child-width-auto" uk-grid>
+                            <div>
+                                <a class="uk-button uk-button-text" href="{{ article.url }}">Show original article in CNN</a>
+                            </div>
+                        </div>
+
+                    </article>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div id="offcanvas" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar">
+        <ul class="uk-nav uk-nav-offcanvas">
+            <li class="uk-active">
+                <a href="layouts_frontpage.html">Frontpage</a>
+            </li>
+            <li>
+                <a href="layouts_portfolio.html">Portfolio</a>
+            </li>
+            <li>
+                <a href="layouts_blog.html">Blog</a>
+            </li>
+            <li>
+                <a href="layouts_documentation.html">Documentation</a>
+            </li>
+            <li>
+                <a href="layouts_contact.html">Contact</a>
+            </li>
+            <li>
+                <a href="layouts_login.html">Login</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

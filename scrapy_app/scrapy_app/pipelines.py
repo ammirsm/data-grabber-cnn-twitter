@@ -13,7 +13,10 @@ class ScrapyAppPipeline(object):
             news = News(
                 headline=item.get('headline'),
                 body=item.get('body'),
-                url=item.get('url')
+                url=item.get('url'),
+                byline=item.get('byLine'),
+                section=item.get('section'),
+                picture=item.get('picture'),
             )
             news.save()
         elif item.get('type') == "tweet":

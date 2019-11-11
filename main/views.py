@@ -42,7 +42,14 @@ def homepage(request):
         "news": list_of_news
     }
     return render(request, 'icrawler/home.html', context)
-    return JsonResponse()
+
+
+def article(request, id):
+    news = News.objects.get(id=id)
+    context = {
+        "article": news
+    }
+    return render(request, 'icrawler/article.html', context)
 
 
 @csrf_exempt
